@@ -12,17 +12,25 @@ const App = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: ''
+    
   });
 
    // Handle form input change
    const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value
-    });
+     
+      
+    }));
+    if (name === "phone") {
+      console.log("Phone number: ", value);
+    }
   };
+  
 
   // Function to handle form submission
   const handleSubmit = (e) => {
@@ -35,6 +43,7 @@ const App = () => {
     setFormData({
       name: '',
       email: '',
+      phone: '',
       message: ''
     });
 
@@ -370,11 +379,11 @@ const App = () => {
     </section>
     
     <section id="more-menu" style={{
-      backgroundImage: 'url(background3.jpg)',
-  padding: '100px',
-  background: 'linear-gradient(to bottom right, #89B189, #6FA56F)',
-  color: '#333',
-  textAlign: 'center'
+      backgroundImage: 'url(bg.jpg)',
+      padding: '100px',
+      background: 'linear-gradient(to bottom right, #89B189, #6FA56F)',
+      color: '#333',
+      textAlign: 'center'
 }}>
   <h2 style={{
     fontSize: '36px',
@@ -390,7 +399,7 @@ const App = () => {
     <div className="row">
       {/* Menu Item 1 */}
       <div className="col-md-4 text-center mb-5">
-        <div className="menu-item" style={{
+        <div className="image-hover-effect" style={{
           padding: '20px',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           backgroundColor: '#fff',
@@ -405,13 +414,13 @@ const App = () => {
             transition: 'transform 0.3s ease'
           }}/>
           <h5 style={{ marginTop: '20px', fontWeight: '600' }}>Hot Beverages</h5>
-          <p style={{ fontSize: '14px', color: '#666' }}>Wide range of Steaming hot coffees to make you fresh and light.</p>
+          <p style={{ fontSize: '14px', color: '#666' }}>Wide range of Steaming hot coffees to make you fresh.</p>
         </div>
       </div>
 
       {/* Menu Item 2 */}
       <div className="col-md-4 text-center mb-5">
-        <div className="menu-item" style={{
+        <div className="image-hover-effect" style={{
           padding: '20px',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           backgroundColor: '#fff',
@@ -432,7 +441,7 @@ const App = () => {
 
       {/* Menu Item 3 */}
       <div className="col-md-4 text-center mb-5">
-        <div className="menu-item" style={{
+        <div className="image-hover-effect" style={{
           padding: '20px',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           backgroundColor: '#fff',
@@ -447,13 +456,13 @@ const App = () => {
             transition: 'transform 0.3s ease'
           }}/>
           <h5 style={{ marginTop: '20px', fontWeight: '600' }}>Refreshments</h5>
-          <p style={{ fontSize: '14px', color: '#666' }}>Fruity and icy refreshing drinks to make you feel good.</p>
+          <p style={{ fontSize: '14px', color: '#666' }}>Fruity and icy refreshing drinks to make you feel more good.</p>
         </div>
       </div>
 
       {/* Menu Item 4 */}
       <div className="col-md-4 text-center mb-5">
-        <div className="menu-item" style={{
+        <div className="image-hover-effect" style={{
           padding: '20px',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           backgroundColor: '#fff',
@@ -474,7 +483,7 @@ const App = () => {
 
       {/* Menu Item 5 */}
       <div className="col-md-4 text-center mb-5">
-        <div className="menu-item" style={{
+        <div className="image-hover-effect" style={{
           padding: '20px',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           backgroundColor: '#fff',
@@ -489,13 +498,13 @@ const App = () => {
             transition: 'transform 0.3s ease'
           }}/>
           <h5 style={{ marginTop: '20px', fontWeight: '600' }}>Burgers</h5>
-          <p style={{ fontSize: '14px', color: '#666' }}>Yummy! Quick bites to satisfy your small-sized hunger.</p>
+          <p style={{ fontSize: '14px', color: '#666' }}>Yummy!!!  Quick bites to satisfy your small-sized hunger.</p>
         </div>
       </div>
 
       {/* Menu Item 6 */}
       <div className="col-md-4 text-center mb-5">
-        <div className="menu-item" style={{
+        <div className="image-hover-effect" style={{
           padding: '20px',
           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
           backgroundColor: '#fff',
@@ -601,22 +610,22 @@ const App = () => {
     <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto' }}>
       <div className="form-group mb-3">
         <label htmlFor="name" style={{ fontWeight: 'bold' }}>Name:</label>
-        <input type="text" className="form-control" id="name" placeholder="Enter your name" required />
+        <input type="text" className="form-control" name= "name" id="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} required />
       </div>
 
       <div className="form-group mb-3">
         <label htmlFor="email" style={{ fontWeight: 'bold' }}>Email:</label>
-        <input type="email" className="form-control" id="email" placeholder="Enter your email" required />
+        <input type="email" className="form-control" id="email" placeholder="Enter your email" name="email" value={formData.email} onChange={handleChange} required />
       </div>
 
       <div className="form-group mb-3">
         <label htmlFor="phone" style={{ fontWeight: 'bold' }}>Phone:</label>
-        <input type="tel" className="form-control" id="phone" placeholder="Enter your phone number" required />
+        <input type="tel" className="form-control" id="phone" placeholder="Enter your phone number" name="phone" value={formData.phone} onChange={handleChange} required />
       </div>
 
       <div className="form-group mb-4">
         <label htmlFor="message" style={{ fontWeight: 'bold' }}>Message:</label>
-        <textarea className="form-control" id="message" rows="5" placeholder="Write your message" required></textarea>
+        <textarea className="form-control" id="message" rows="5" placeholder="Write your message" name="message" value={formData.message} onChange={handleChange} required></textarea>
       </div>
 
       <button type="submit" className="btn btn-primary w-100" style={{ padding: '10px 0' }}>
